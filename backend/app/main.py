@@ -3,14 +3,19 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
 from app.database import SessionLocal, engine
-from app.models import User, Base
+from app.models import User, Base, Doctor  # ✅ Make sure Doctor is included
 from app.utils import hash_password, verify_password
 from app.auth import create_access_token
+from app.routes import doctors
 
-# Create DB tables
+# ✅ Create all DB tables (User, Doctor, etc.)
 Base.metadata.create_all(bind=engine)
 
+# FastAPI instance
 app = FastAPI()
+
+# ✅ Register routers
+app.include_router(doctors.router)
 
 # Schemas
 class UserCreate(BaseModel):

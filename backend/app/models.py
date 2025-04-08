@@ -9,3 +9,13 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+
+from sqlalchemy import Column, Integer, String, Text
+
+class Doctor(Base):
+    __tablename__ = "doctors"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    specialty = Column(String, nullable=False)
+    bio = Column(Text)
+    image_url = Column(String)
